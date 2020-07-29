@@ -1,0 +1,36 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+
+<div class="centerstage">
+
+  {% for post in post_list %}
+
+  <div class="post">
+
+
+    <h1><a id="post_title" class="particletext fire" href="{% url 'post_detail' pk=post.pk%}">{{post.title}}</a></h1>
+
+    {% if post.photo %}
+    <a href="{% url 'post_detail' pk=post.pk%}">
+    <img src="{{ post.photo_url|default_if_none:'#' }}" height="200" width="300" />
+    </a>
+    {% endif %}
+
+    <div class="date">
+      <p>Published on: {{ post.published_date }}</p>
+
+    </div>
+
+    <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.approve_comments.count }}</a>
+
+
+
+  </div>
+
+  {% endfor %}
+
+</div>
+
+
+{% endblock %}
